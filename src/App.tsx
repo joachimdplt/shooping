@@ -1,7 +1,8 @@
 import SidebarNavigation from "./components/SideNavigation"
 import { itemData } from "./data/itemData"
 import ItemToCard from "./components/Item"
-import { use, useState } from "react"
+import { useState } from "react"
+import { FiArrowLeftCircle } from "react-icons/fi"
 
 ///SUITE STEP 2
 /// handleDataFromChild={getItemFromChild} 
@@ -10,11 +11,29 @@ import { use, useState } from "react"
 
 const App = () => {
 
-  const [selectedItem, setSelectedItem]= useState<string>("")
+  const [selectedItem, setSelectedItem]= useState<string[]>([])
 
   // 2.2 PUIS JE DECLARE la fonction, je log si le composant est bien cliqué depuis le parent
   const getItemFromChild = (itemTitle: string) => {
-    setSelectedItem(itemTitle)
+    ////VErifier si element deja present dans le panier ? On fait un variable 
+    ///si deja present ne rien changer IF pour condition 
+    // sinon ajouter le nouvel item au panier avec une variable
+/*     const ancien = ["pomme", "banane"]
+      const nouveau = [...ancien, "orange"]
+      console.log(nouveau) // ["pomme", "banane", "orange"] */
+      setSelectedItem((prev) => {
+        const onCard = prev.includes(itemTitle)
+
+        if(onCard) {
+          return prev
+        }
+        const newCard = [...prev, itemTitle]
+        return newCard
+
+      }) 
+
+
+
     console.log(itemTitle);
     
 
@@ -24,7 +43,7 @@ const App = () => {
 
     <div className="flex flex-col items-center mb-4">
         <SidebarNavigation selectedItem={selectedItem}/>
-        <h3>ITEM SELECTED : {selectedItem}</h3>
+        <h3>ITEM SELECTED : {selectedItem.join(", ")}</h3>
       <div className="gap-3 items-center grid grid-cols-4 ">
         {
           itemData.length && itemData.map((item, index) => (

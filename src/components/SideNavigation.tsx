@@ -1,10 +1,7 @@
 import { CiShoppingCart } from "react-icons/ci"
 
-interface SidebarNavigationProps {
-  selectedItem: string
-}
 
-const SidebarNavigation = ({ selectedItem } : SidebarNavigationProps ) => {
+const SidebarNavigation = ({ selectedItem } : any) => {
 
     return (
 
