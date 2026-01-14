@@ -1,12 +1,24 @@
+import { useState } from "react"
 import type { IItem } from "../interfaces/item"
+import { CiShoppingCart } from "react-icons/ci";
+
+
+
 
 
 interface IItemComponent {
     itemInfos: IItem,
 }
 
-const ItemArray = ({ itemInfos }: IItemComponent) => {
+const itemToCard = ({ itemInfos }: IItemComponent) => {
+    ///let count = 0 
+    const [counter, setCounter] = useState<number>(0)
 
+    const countItem = () => {
+        setCounter(counter +1)
+
+        console.log(counter, itemInfos)
+    }
 
 
 
@@ -26,7 +38,8 @@ const ItemArray = ({ itemInfos }: IItemComponent) => {
                 </div>
             </div>
             <div className="flex justify-center mt-4">
-                <button className="btn btn-secondary">Add to card</button>
+                <CiShoppingCart onClick={() => countItem()}  /> {counter}
+
 
             </div>
 
@@ -36,4 +49,4 @@ const ItemArray = ({ itemInfos }: IItemComponent) => {
         </div>
     )
 }
-export default ItemArray;
+export default itemToCard;
