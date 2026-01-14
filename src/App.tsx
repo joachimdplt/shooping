@@ -1,8 +1,9 @@
+import { Item } from "./components/Item"
 const App = () => {
 
   return (
     <div>
-    hello world
+      <Item />
     
     </div>
   )
